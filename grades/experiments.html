@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080808">
+
+    <title>آزمایشات | NEXORA</title>
+
+    <link rel="stylesheet" href="../grade.css">
+
+    <style>
+        .experiment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .experiment-card {
+            background: #111;
+            border: 1px solid #292929;
+            color: white;
+            padding: 25px;
+            min-height: 180px;
+            text-align: right;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .experiment-card:hover {
+            background: #191919;
+            border-color: #777;
+            transform: translateY(-4px);
+        }
+
+        .experiment-number {
+            direction: ltr;
+            display: block;
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .experiment-card h3 {
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        .experiment-card p {
+            color: #888;
+            font-size: 11px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 850px) {
+            .experiment-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .experiment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="grade-header">
+        <div class="container grade-nav">
+
+            <a href="../index.html" class="grade-logo">
+                NEXORA<span>.</span>
+            </a>
+
+            <a href="../index.html" class="back-home">
+                بازگشت به صفحه اصلی ←
+            </a>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <section class="grade-hero">
+            <div class="container">
+
+                <span class="grade-label">SCIENCE / EXPERIMENTS</span>
+
+                <h1>آزمایشات علمی</h1>
+
+                <p>
+                    علم را فقط نخوانید؛ آن را مشاهده کنید.
+                    مجموعه‌ای از آزمایش‌های علمی و آموزشی.
+                </p>
+
+            </div>
+        </section>
+
+
+        <section class="lessons-section container">
+
+            <div class="lessons-heading">
+
+                <h2>فهرست آزمایش‌ها</h2>
+
+                <span class="lesson-count">11 EXPERIMENTS</span>
+
+            </div>
+
+            <div class="experiment-grid" id="experimentGrid"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- VIDEO PLAYER -->
+
+    <div class="video-modal" id="videoModal">
+
+        <div class="video-box">
+
+            <div class="video-top">
+
+                <h3 id="videoTitle">پخش آزمایش</h3>
+
+                <button class="video-close" id="closeVideo" type="button" aria-label="بستن ویدیو">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="video-player" id="videoPlayer"></div>
+
+        </div>
+
+    </div>
+
+
+    <footer class="grade-footer">
+        <div class="container">
+            <p>شکست همیشه باعث بهبود می‌شود. | NEXORA</p>
+        </div>
+    </footer>
+
+
+    <script>
+
+        const experiments = [
+
+            {
+                title: "تأثیر میزان غلظت بر تولید گاز",
+                id: "tvj502d"
+            },
+
+            {
+                title: "واکنش آب آهک با کربن دی‌اکسید",
+                id: "jvji892"
+            },
+
+            {
+                title: "حل شدن قرص جوشان در آب",
+                id: "kykr9pp"
+            },
+
+            {
+                title: "تشکیل رسوب آهن (III) هیدروکسید و مس (II) هیدروکسید",
+                id: "yuttq0c"
+            },
+
+            {
+                title: "آزمایش آونگ با شبیه‌ساز PhET",
+                id: "qwt1pq7"
+            },
+
+            {
+                title: "استخراج آهن",
+                id: "wsb2vj2"
+            },
+
+            {
+                title: "نفوذپذیری انواع خاک",
+                id: "yvgewtz"
+            },
+
+            {
+                title: "تخم‌مرغ و سرکه",
+                id: "phzvf1x"
+            },
+
+            {
+                title: "رسانش میله‌های فلزی",
+                id: "kfhkz5e"
+            },
+
+            {
+                title: "شناوری و چگالی",
+                id: "qtm021s"
+            },
+
+            {
+                title: "تعادل گرمایی",
+                id: "ktvusyq"
+            }
+
+        ];
+
+
+        const grid = document.getElementById("experimentGrid");
+        const modal = document.getElementById("videoModal");
+        const player = document.getElementById("videoPlayer");
+        const titleElement = document.getElementById("videoTitle");
+        const closeButton = document.getElementById("closeVideo");
+
+
+        // ساخت کارت آزمایش‌ها
+
+        experiments.forEach((experiment, index) => {
+
+            const card = document.createElement("button");
+
+            card.className = "experiment-card";
+            card.type = "button";
+
+            card.innerHTML = `
+                <span class="experiment-number">
+                    EXPERIMENT ${String(index + 1).padStart(2, "0")}
+                </span>
+
+                <h3>${experiment.title}</h3>
+
+                <p>برای مشاهده ویدیو کلیک کنید</p>
+            `;
+
+            card.addEventListener("click", () => {
+                openVideo(experiment.id, experiment.title);
+            });
+
+            grid.appendChild(card);
+
+        });
+
+
+        // پخش ویدیو داخل سایت
+
+        function openVideo(videoId, title) {
+
+            titleElement.textContent = title;
+
+            player.innerHTML = "";
+
+            const containerId = "aparat_" + Date.now();
+
+            const embedContainer = document.createElement("div");
+            embedContainer.id = containerId;
+
+            player.appendChild(embedContainer);
+
+            const script = document.createElement("script");
+
+            script.type = "text/javascript";
+
+            script.src =
+                "https://www.aparat.com/embed/" +
+                encodeURIComponent(videoId) +
+                "?data[rnddiv]=" +
+                containerId +
+                "&data[responsive]=yes";
+
+            embedContainer.appendChild(script);
+
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden";
+
+        }
+
+
+        // بستن پخش‌کننده
+
+        function closeVideo() {
+
+            modal.classList.remove("active");
+
+            player.innerHTML = "";
+
+            document.body.style.overflow = "";
+
+        }
+
+
+        closeButton.addEventListener("click", closeVideo);
+
+
+        modal.addEventListener("click", (event) => {
+
+            if (event.target === modal) {
+                closeVideo();
+            }
+
+        });
+
+
+        document.addEventListener("keydown", (event) => {
+
+            if (event.key === "Escape") {
+                closeVideo();
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

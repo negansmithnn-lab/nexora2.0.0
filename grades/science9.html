@@ -1,71 +1,102 @@
-```html
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#080808">
+
     <title>علوم نهم | NEXORA</title>
+
     <link rel="stylesheet" href="../grade.css">
 </head>
 
-<body data-grade="9">
+<body>
 
     <header class="grade-header">
-        <a href="../index.html" class="back-link">← بازگشت به NEXORA</a>
-        <div class="grade-logo">NEXORA<span>.</span></div>
+        <div class="container grade-nav">
+
+            <a href="../index.html" class="grade-logo">
+                NEXORA<span>.</span>
+            </a>
+
+            <a href="../index.html" class="back-home">
+                بازگشت به صفحه اصلی ←
+            </a>
+
+        </div>
     </header>
 
+
     <main>
+
         <section class="grade-hero">
-            <div class="grade-hero-content">
-                <span class="eyebrow">NEXORA ACADEMY / SCIENCE</span>
-                <h1>علوم <span>نهم</span></h1>
-                <p>آخرین مرحله؛ جایی برای پرسش‌های پیچیده‌تر و کشف‌های بزرگ‌تر.</p>
+            <div class="container">
 
-                <div class="grade-meta">
-                    <span>GRADE 09</span>
-                    <span>SCIENCE</span>
-                    <span>EXPLORE MORE</span>
-                </div>
-            </div>
+                <span class="grade-label">SCIENCE / GRADE 09</span>
 
-            <div class="grade-visual">
-                <div class="science-orbit orbit-one"></div>
-                <div class="science-orbit orbit-two"></div>
-                <div class="science-core">09</div>
-                <span class="visual-label">EXPLORE THE UNKNOWN</span>
+                <h1>علوم نهم</h1>
+
+                <p>
+                    آموزش ویدیویی فصل‌های علوم پایه نهم
+                    در یک مسیر ساده و منظم.
+                </p>
+
             </div>
         </section>
 
-        <section class="lessons-section">
 
-            <div class="section-heading">
-                <div>
-                    <span class="eyebrow">YOUR LEARNING PATH</span>
-                    <h2>فهرست درس‌ها</h2>
-                </div>
-                <span class="lesson-count">SCIENCE 09</span>
+        <section class="lessons-section container">
+
+            <div class="lessons-heading">
+
+                <h2>فهرست درس‌ها</h2>
+
+                <span class="lesson-count">
+                    15 LESSONS
+                </span>
+
             </div>
 
             <div class="lesson-grid" id="lessonGrid">
-                <!-- درس‌ها توسط grade.js بارگذاری می‌شوند -->
+                <!-- کارت‌های درس با JavaScript ساخته می‌شوند -->
             </div>
 
         </section>
+
     </main>
 
+
+    <div class="video-modal" id="videoModal">
+
+        <div class="video-box">
+
+            <div class="video-top">
+
+                <h3 id="videoTitle">پخش ویدیو</h3>
+
+                <button class="video-close" id="closeVideo" type="button" aria-label="بستن ویدیو">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="video-player" id="videoPlayer"></div>
+
+        </div>
+
+    </div>
+
+
     <footer class="grade-footer">
-        <span>NEXORA.</span>
-        <p>شکست همیشه باعث بهبود می‌شود.</p>
-        <a href="https://eitaa.com/negan_smithnn" target="_blank">
-            NEXORA FEEDBACK
-        </a>
+        <div class="container">
+            <p>شکست همیشه باعث بهبود می‌شود. | NEXORA</p>
+        </div>
     </footer>
 
+
     <script src="../grade.js"></script>
+
 </body>
 
 </html>
-```

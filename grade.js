@@ -1,139 +1,334 @@
+﻿
+// ==========================================
+// NEXORA - GRADE SYSTEM
+// ==========================================
 
-// ==========================================
-// NEXORA 2.0 - SCIENCE LESSON SYSTEM
-// ==========================================
+// اطلاعات ویدیوهای هر پایه
 
 const lessons = {
-    "7": [
-        "https://www.aparat.com/v/i11t55x?playlist=451093",
-        "https://www.aparat.com/v/h516334?playlist=451093",
-        "https://www.aparat.com/v/a196ba7?playlist=451093",
-        "https://www.aparat.com/v/v38yw2a?playlist=451093",
-        "https://www.aparat.com/v/h34765x?playlist=451093",
-        "https://www.aparat.com/v/HUvE7?playlist=451093",
-        "https://www.aparat.com/v/w4283u2?playlist=451093",
-        "https://www.aparat.com/v/c490js6?playlist=451093",
-        "https://www.aparat.com/v/o0IFj?playlist=451093",
-        "https://www.aparat.com/v/a8953c5?playlist=451093",
-        "https://www.aparat.com/v/b231ugi?playlist=451093",
-        "https://www.aparat.com/v/cVrvi?playlist=451093",
-        "https://www.aparat.com/v/z22f4s6?playlist=451093",
-        "https://www.aparat.com/v/f064xs5?playlist=451093",
-        "https://www.aparat.com/v/b819c69?playlist=451093"
+
+    grade7: [
+        "i11t55x",
+        "h516334",
+        "a196ba7",
+        "v38yw2a",
+        "h34765x",
+        "HUvE7",
+        "w4283u2",
+        "c490js6",
+        "o0IFj",
+        "a8953c5",
+        "b231ugi",
+        "cVrvi",
+        "z22f4s6",
+        "f064xs5",
+        "b819c69"
     ],
 
-    "8": [
-        "https://www.aparat.com/v/Ekwoq?playlist=458393",
-        "https://www.aparat.com/v/a73q6v8?playlist=458393",
-        "https://www.aparat.com/v/k82g60w?playlist=458393",
-        "https://www.aparat.com/v/p16v0wx?playlist=458393",
-        "https://www.aparat.com/v/m009e32?playlist=458393",
-        "https://www.aparat.com/v/i191vet?playlist=458393",
-        "https://www.aparat.com/v/m815452?playlist=458393",
-        "https://www.aparat.com/v/n22sckr?playlist=458393",
-        "https://www.aparat.com/v/8bO9U?playlist=458393",
-        "https://www.aparat.com/v/l44t91m?playlist=458393",
-        "https://www.aparat.com/v/u19tnnj?playlist=458393",
-        "https://www.aparat.com/v/6G5C2?playlist=458393",
-        "https://www.aparat.com/v/c68j20l?playlist=458393",
-        "https://www.aparat.com/v/v75s1b1?playlist=458393",
-        "https://www.aparat.com/v/o54de87?playlist=458393",
-        "https://www.aparat.com/v/l94256b?playlist=458393"
+    grade8: [
+        "Ekwoq",
+        "a73q6v8",
+        "k82g60w",
+        "p16v0wx",
+        "m009e32",
+        "i191vet",
+        "m815452",
+        "n22sckr",
+        "8bO9U",
+        "l44t91m",
+        "u19tnnj",
+        "6G5C2",
+        "c68j20l",
+        "v75s1b1",
+        "o54de87",
+        "l94256b"
     ],
 
-    "9": [
-        "https://www.aparat.com/v/s86xkku?playlist=336296",
-        "https://www.aparat.com/v/n84n0hy?playlist=336296",
-        "https://www.aparat.com/v/xho4a?playlist=336296",
-        "https://www.aparat.com/v/y49jk63?playlist=336296",
-        "https://www.aparat.com/v/i32dxw0?playlist=336296",
-        "https://www.aparat.com/v/d65x842?playlist=336296",
-        "https://www.aparat.com/v/c62b795?playlist=336296",
-        "https://www.aparat.com/v/2rko3?playlist=336296",
-        "https://www.aparat.com/v/d154zq8?playlist=336296",
-        "https://www.aparat.com/v/x4542o3?playlist=336296",
-        "https://www.aparat.com/v/p84ql30?playlist=336296",
-        "https://www.aparat.com/v/j0t3s?playlist=336296",
-        "https://www.aparat.com/v/f739e3j?playlist=336296",
-        "https://www.aparat.com/v/dN8aM?playlist=336296",
-        "https://www.aparat.com/v/y4386w9?playlist=336296"
+    grade9: [
+        "s86xkku",
+        "n84n0hy",
+        "xho4a",
+        "y49jk63",
+        "i32dxw0",
+        "d65x842",
+        "c62b795",
+        "2rko3",
+        "d154zq8",
+        "x4542o3",
+        "p84ql30",
+        "j0t3s",
+        "f739e3j",
+        "dN8aM",
+        "y4386w9"
     ]
+
 };
 
-// عنوان کارت‌ها
-const lessonTitles = {
-    "7": [],
-    "8": [],
-    "9": []
-};
 
-// تشخیص پایه از صفحه
-const grade = document.body.dataset.grade;
-const lessonGrid = document.getElementById("lessonGrid");
+// ==========================================
+// تشخیص پایه از آدرس صفحه
+// ==========================================
 
-// ساخت کارت‌ها
-function createLessonCard(url, index, gradeNumber) {
-    const card = document.createElement("a");
+const currentPage = window.location.pathname;
 
-    card.className = "lesson-card";
-    card.href = url;
-    card.target = "_blank";
-    card.rel = "noopener noreferrer";
+let currentGrade = null;
 
-    let title = `درس ${index + 1}`;
-
-    if (gradeNumber === "8" && index === 8) {
-        title = "درس نهم - قسمت اول";
-    }
-
-    if (gradeNumber === "8" && index === 9) {
-        title = "درس نهم - قسمت دوم";
-    }
-
-    card.innerHTML = `
-    <div class="lesson-number">
-      ${String(index + 1).padStart(2, "0")}
-    </div>
-
-    <div class="lesson-info">
-      <span class="lesson-label">SCIENCE ${gradeNumber}</span>
-      <h3>${title}</h3>
-      <p>برای مشاهده ویدیو کلیک کن</p>
-    </div>
-
-    <div class="lesson-play">
-      ▶
-    </div>
-  `;
-
-    return card;
+if (currentPage.includes("science7")) {
+    currentGrade = "grade7";
 }
 
-// نمایش کارت‌ها
+else if (currentPage.includes("science8")) {
+    currentGrade = "grade8";
+}
+
+else if (currentPage.includes("science9")) {
+    currentGrade = "grade9";
+}
+
+
+// ==========================================
+// عناصر صفحه
+// ==========================================
+
+const lessonGrid = document.getElementById("lessonGrid");
+
+const videoModal = document.getElementById("videoModal");
+
+const videoPlayer = document.getElementById("videoPlayer");
+
+const videoTitle = document.getElementById("videoTitle");
+
+const closeVideo = document.getElementById("closeVideo");
+
+
+// ==========================================
+// ساخت نام درس‌ها
+// ==========================================
+
+function getLessonInfo(grade, index) {
+
+    const number = index + 1;
+
+    // پایه هشتم: 16 ویدیو برای 15 درس
+
+    if (grade === "grade8") {
+
+        if (number === 9) {
+            return {
+                number: "09",
+                title: "درس نهم - قسمت اول"
+            };
+        }
+
+        if (number === 10) {
+            return {
+                number: "09",
+                title: "درس نهم - قسمت دوم"
+            };
+        }
+
+        const actualLesson = number - 1;
+
+        return {
+            number: String(actualLesson).padStart(2, "0"),
+            title: `درس ${actualLesson < 9 ? " " : ""}${[
+                "",
+                "اول",
+                "دوم",
+                "سوم",
+                "چهارم",
+                "پنجم",
+                "ششم",
+                "هفتم",
+                "هشتم",
+                "نهم",
+                "دهم",
+                "یازدهم",
+                "دوازدهم",
+                "سیزدهم",
+                "چهاردهم",
+                "پانزدهم"
+            ][actualLesson]}`
+        };
+    }
+
+    // پایه هفتم و نهم
+
+    const names = [
+        "",
+        "اول",
+        "دوم",
+        "سوم",
+        "چهارم",
+        "پنجم",
+        "ششم",
+        "هفتم",
+        "هشتم",
+        "نهم",
+        "دهم",
+        "یازدهم",
+        "دوازدهم",
+        "سیزدهم",
+        "چهاردهم",
+        "پانزدهم"
+    ];
+
+    return {
+        number: String(number).padStart(2, "0"),
+        title: `درس ${names[number]}`
+    };
+
+}
+
+
+// ==========================================
+// ساخت کارت‌های درس
+// ==========================================
+
 function renderLessons() {
-    if (!lessonGrid) {
-        console.error("NEXORA ERROR: lessonGrid پیدا نشد!");
+
+    if (!lessonGrid || !currentGrade) {
+        console.error("NEXORA ERROR: صفحه درس یا پایه شناسایی نشد.");
         return;
     }
 
-    const gradeLessons = lessons[grade];
+    const gradeLessons = lessons[currentGrade];
 
     if (!gradeLessons) {
-        console.error("NEXORA ERROR: پایه موردنظر پیدا نشد!");
+        console.error("NEXORA ERROR: ویدیوهای این پایه پیدا نشدند.");
         return;
     }
 
     lessonGrid.innerHTML = "";
 
-    gradeLessons.forEach((url, index) => {
-        const card = createLessonCard(url, index, grade);
+    gradeLessons.forEach((videoId, index) => {
+
+        const info = getLessonInfo(currentGrade, index);
+
+        const card = document.createElement("button");
+
+        card.className = "lesson-card";
+
+        card.type = "button";
+
+        card.innerHTML = `
+            <span class="lesson-number">
+                LESSON ${info.number}
+            </span>
+
+            <h3>${info.title}</h3>
+
+            <p>برای مشاهده ویدیو کلیک کنید</p>
+
+            <span class="lesson-arrow">↗</span>
+        `;
+
+        card.addEventListener("click", () => {
+            openVideo(videoId, info.title);
+        });
+
         lessonGrid.appendChild(card);
+
     });
 
-    console.log(
-        `NEXORA: ${gradeLessons.length} lessons loaded for grade ${grade}`
-    );
 }
 
-// اجرا
+
+// ==========================================
+// پخش ویدیو داخل سایت
+// ==========================================
+
+function openVideo(videoId, title) {
+
+    if (!videoModal || !videoPlayer || !videoTitle) {
+        console.error("NEXORA ERROR: عناصر پخش ویدیو پیدا نشدند.");
+        return;
+    }
+
+    videoTitle.textContent = title;
+
+    videoPlayer.innerHTML = "";
+
+    const iframe = document.createElement("iframe");
+
+    iframe.src =
+        `https://www.aparat.com/video/video/embed/videohash/${encodeURIComponent(videoId)}/vt/frame`;
+
+    iframe.title = title;
+
+    iframe.allow = "autoplay; fullscreen";
+
+    iframe.allowFullscreen = true;
+
+    iframe.loading = "lazy";
+
+    videoPlayer.appendChild(iframe);
+
+    videoModal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+// ==========================================
+// بستن ویدیو
+// ==========================================
+
+function closeVideoPlayer() {
+
+    if (!videoModal || !videoPlayer) {
+        return;
+    }
+
+    videoModal.classList.remove("active");
+
+    videoPlayer.innerHTML = "";
+
+    document.body.style.overflow = "";
+
+}
+
+
+// ==========================================
+// رویدادهای دکمه بستن
+// ==========================================
+
+if (closeVideo) {
+    closeVideo.addEventListener("click", closeVideoPlayer);
+}
+
+
+// بستن با کلیک روی فضای بیرون ویدیو
+
+if (videoModal) {
+
+    videoModal.addEventListener("click", (event) => {
+
+        if (event.target === videoModal) {
+            closeVideoPlayer();
+        }
+
+    });
+
+}
+
+
+// بستن با کلید Escape
+
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") {
+        closeVideoPlayer();
+    }
+
+});
+
+
+// ==========================================
+// اجرای سیستم
+// ==========================================
+
 renderLessons();
+
+console.log("NEXORA: Grade system loaded successfully.");

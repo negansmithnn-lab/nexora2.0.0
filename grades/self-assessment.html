@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080808">
+
+    <title>خودسنجی | NEXORA</title>
+
+    <link rel="stylesheet" href="../grade.css">
+
+    <style>
+        .grade-tabs {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .grade-tab {
+            background: #111;
+            color: #aaa;
+            border: 1px solid #333;
+            padding: 12px 25px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .grade-tab:hover,
+        .grade-tab.active {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .pdf-card {
+            background: #111;
+            color: white;
+            border: 1px solid #292929;
+            padding: 20px 10px;
+            font-family: inherit;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .pdf-card:hover,
+        .pdf-card.active {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        .pdf-viewer {
+            display: none;
+            margin-top: 35px;
+        }
+
+        .pdf-viewer.active {
+            display: block;
+        }
+
+        .pdf-viewer h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .pdf-frame {
+            width: 100%;
+            height: 750px;
+            border: 1px solid #333;
+            background: white;
+        }
+
+        @media (max-width: 750px) {
+            .pdf-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .pdf-frame {
+                height: 550px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .pdf-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grade-tab {
+                flex: 1;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="grade-header">
+        <div class="container grade-nav">
+
+            <a href="../index.html" class="grade-logo">
+                NEXORA<span>.</span>
+            </a>
+
+            <a href="../index.html" class="back-home">
+                بازگشت به صفحه اصلی ←
+            </a>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <section class="grade-hero">
+            <div class="container">
+
+                <span class="grade-label">SELF ASSESSMENT</span>
+
+                <h1>خودسنجی</h1>
+
+                <p>
+                    فایل‌های خودسنجی علوم پایه‌های هفتم، هشتم و نهم.
+                    درس موردنظر خود را انتخاب کنید.
+                </p>
+
+            </div>
+        </section>
+
+
+        <section class="lessons-section container">
+
+            <div class="lessons-heading">
+                <h2>انتخاب پایه</h2>
+                <span class="lesson-count">45 PDF FILES</span>
+            </div>
+
+            <div class="grade-tabs">
+
+                <button class="grade-tab active" data-grade="grade7">
+                    پایه هفتم
+                </button>
+
+                <button class="grade-tab" data-grade="grade8">
+                    پایه هشتم
+                </button>
+
+                <button class="grade-tab" data-grade="grade9">
+                    پایه نهم
+                </button>
+
+            </div>
+
+
+            <div class="lessons-heading">
+                <h2>فهرست فایل‌ها</h2>
+            </div>
+
+            <div class="pdf-grid" id="pdfGrid"></div>
+
+
+            <div class="pdf-viewer" id="pdfViewer">
+
+                <h3 id="pdfTitle">نمایش فایل خودسنجی</h3>
+
+                <iframe class="pdf-frame" id="pdfFrame" title="فایل خودسنجی" src="" loading="lazy">
+                </iframe>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="grade-footer">
+        <div class="container">
+            <p>شکست همیشه باعث بهبود می‌شود. | NEXORA</p>
+        </div>
+    </footer>
+
+
+    <script>
+
+        const pdfFiles = {
+
+            grade7: [
+                "درس اول.pdf",
+                "درس دوم.pdf",
+                "درس سوم.pdf",
+                "درس چهارم.pdf",
+                "درس پنجم.pdf",
+                "درس ششم.pdf",
+                "درس هفتم.pdf",
+                "درس هشتم.pdf",
+                "درس نهم.pdf",
+                "درس دهم.pdf",
+                "درس یازده.pdf",
+                "درس دوازده.pdf",
+                "درس سیزدهم.pdf",
+                "درس چهاردهم.pdf",
+                "درس پانزده.pdf"
+            ],
+
+            grade8: [
+                "درس اول.pdf",
+                "درس دوم.pdf",
+                "درس سوم.pdf",
+                "درس چهارم.pdf",
+                "درس پنجم.pdf",
+                "درس ششم.pdf",
+                "درس هفتم.pdf",
+                "درس هشتم.pdf",
+                "درس نهم.pdf",
+                "درس دهم.pdf",
+                "درس یازدهم.pdf",
+                "درس دوازدهم.pdf",
+                "درس سیزدهم.pdf",
+                "درس چهاردهم.pdf",
+                "درس پانزدهم.pdf"
+            ],
+
+            grade9: [
+                "درس 1.pdf",
+                "درس 2.pdf",
+                "درس 3.pdf",
+                "درس4.pdf",
+                "درس 5.pdf",
+                "درس 6.pdf",
+                "درس 7.pdf",
+                "درس 8.pdf",
+                "درس 9.pdf",
+                "درس 10.pdf",
+                "درس 11.pdf",
+                "درس 12.pdf",
+                "درس 13.pdf",
+                "درس 14.pdf",
+                "درس 15.pdf"
+            ]
+
+        };
+
+
+        const pdfGrid = document.getElementById("pdfGrid");
+        const pdfFrame = document.getElementById("pdfFrame");
+        const pdfTitle = document.getElementById("pdfTitle");
+        const pdfViewer = document.getElementById("pdfViewer");
+        const gradeTabs = document.querySelectorAll(".grade-tab");
+
+
+        let currentGrade = "grade7";
+
+
+        function showPDF(file, index) {
+
+            const path = `../pdfs/${currentGrade}/${encodeURIComponent(file)}`;
+
+            pdfFrame.src = path;
+            pdfTitle.textContent = `درس ${index + 1} | خودسنجی`;
+
+            pdfViewer.classList.add("active");
+
+            document.querySelectorAll(".pdf-card").forEach(card => {
+                card.classList.remove("active");
+            });
+
+            const selectedCard = document.querySelector(
+                `.pdf-card[data-index="${index}"]`
+            );
+
+            if (selectedCard) {
+                selectedCard.classList.add("active");
+            }
+
+        }
+
+
+        function renderPDFs(grade) {
+
+            currentGrade = grade;
+            pdfGrid.innerHTML = "";
+
+            pdfViewer.classList.remove("active");
+            pdfFrame.src = "";
+
+            pdfFiles[grade].forEach((file, index) => {
+
+                const button = document.createElement("button");
+
+                button.className = "pdf-card";
+                button.type = "button";
+                button.dataset.index = index;
+
+                button.textContent = `درس ${index + 1}`;
+
+                button.addEventListener("click", () => {
+                    showPDF(file, index);
+                });
+
+                pdfGrid.appendChild(button);
+
+            });
+
+        }
+
+
+        gradeTabs.forEach(tab => {
+
+            tab.addEventListener("click", () => {
+
+                gradeTabs.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                tab.classList.add("active");
+
+                renderPDFs(tab.dataset.grade);
+
+            });
+
+        });
+
+
+        renderPDFs("grade7");
+
+    </script>
+
+</body>
+
+</html>
